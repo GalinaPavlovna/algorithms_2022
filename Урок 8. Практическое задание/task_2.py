@@ -22,15 +22,15 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
-    def insert_child(self,new_node):
-        n=new_node if isinstance(new_node,int) else new_node.root
+    def insert_child(self, new_node):
+        n = new_node if isinstance(new_node, int) else new_node.root
         if n < self.root:
             if self.left_child:
-                a=self.left_child
-                self.left_child=BinaryTree(new_node) if isinstance(new_node,int) else new_node
+                a = self.left_child
+                self.left_child = BinaryTree(new_node) if isinstance(new_node, int) else new_node
                 self.left_child.insert_child(a)
             else:
-                self.left_child=BinaryTree(new_node) if isinstance(new_node, int) else new_node
+                self.left_child = BinaryTree(new_node) if isinstance(new_node, int) else new_node
 
         else:
             if self.right_child:
@@ -96,9 +96,9 @@ r.insert_child(40)
 r.insert_child(12)
 r.insert_child(3)
 r.insert_child(5)
-print (r)
+print(r)
 print("****")
-print (r.left_child)
+print(r.left_child)
 print("****")
 print(r.right_child)
 
