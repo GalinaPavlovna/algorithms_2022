@@ -22,6 +22,25 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    def insert_child(self,new_node):
+        n=new_node if isinstance(new_node,int) else new_node.root
+        if n < self.root:
+            if self.left_child:
+                a=self.left_child
+                self.left_child=BinaryTree(new_node) if isinstance(new_node,int) else new_node
+                self.left_child.insert_child(a)
+            else:
+                self.left_child=BinaryTree(new_node) if isinstance(new_node, int) else new_node
+
+        else:
+            if self.right_child:
+                a = self.right_child
+                self.right_child = BinaryTree(new_node) if isinstance(new_node, int) else new_node
+                self.right_child.insert_child(a)
+
+            else:
+                self.right_child = BinaryTree(new_node) if isinstance(new_node, int) else new_node
+
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
@@ -68,15 +87,24 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    def __str__(self):
+        return f"Root: {self.root}, \nleft - {self.left_child.root if self.left_child else '-'}, right - {self.right_child.root if self.right_child else '-'}"
+
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r.insert_child(40)
+r.insert_child(12)
+r.insert_child(3)
+r.insert_child(5)
+print (r)
+print("****")
+print (r.left_child)
+print("****")
+print(r.right_child)
+
+"""
+Вместо валидации значений я добавила функцию "insert_child", которая сама разбирается,
+налево вставить потомка, или направо
+
+И перегрузила метод __str__, чтобы результаты прозе было увидеть
+"""
